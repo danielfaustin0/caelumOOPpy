@@ -5,10 +5,11 @@ O programa continua sendo executado até que o usuário acerte o número.
 
     Feb 15 2021 - Daniel Faustino
 """
+import random
+import os
 
-# TODO: keep the script running until answer right
-# TODO: Show hints about the guess is below or above the secret number
-secret_number = 40
+# TODO: generate random numbers
+secret_number = random.randint(1, 50) # generate random numbers
 
 while True:    
     attempt = int(input("Digite o seu palpite: "))
