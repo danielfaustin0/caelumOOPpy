@@ -6,10 +6,17 @@ Quando o número for encontrado, será mostrado o total de tentativas.
 
     Feb 15 2021 - Daniel Faustino
 """
+
+# TODO: generate random numbers
+# TODO: create difficulty levels
+# TODO: Create punctuation system
+# TODO: Stop game running
+# TODO: Verify user's input
+# TODO: Clear the game screen
 import random
 import os
 
-# TODO: generate random numbers
+
 secret_number = random.randint(1, 50) # generate random numbers
 
 failure = 0  # count how many times missed the number
