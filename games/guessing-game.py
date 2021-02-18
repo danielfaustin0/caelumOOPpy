@@ -23,7 +23,6 @@ import os
 
 failure = 0  # count how many times missed the number
 number_limit = 0
-msg = 'Aguardando início do jogo.' 
 error_message = ''
 win = False
 
@@ -65,7 +64,8 @@ while failure > 0:
         points -= score
 
 # points system
+msg = f'\nPontuação final: {points}'
 if win:
-    print(f'você acertou. Sua pontuação: {points}')
+    print(f'você acertou.{msg}')
 else:
-    print("Você não tem mais tentativas.")
+    print(f'Você não tem mais tentativas.{msg}')
