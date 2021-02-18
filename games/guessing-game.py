@@ -11,8 +11,8 @@ Em cada nível aumenta a escala de números e diminui as tentativas.
 """
 
 # TODO: DONE generate random numbers
-# TODO: create difficulty levels
-# TODO: Create punctuation system
+# TODO: DONE create difficulty levels
+# TODO: Create a system points
 # TODO: Stop game running
 # TODO: Verify user's input
 # TODO: Clear the game screen
@@ -23,40 +23,49 @@ import os
 
 failure = 0  # count how many times missed the number
 number_limit = 0
+msg = 'Aguardando início do jogo.' 
+error_message = ''
+win = False
 
+# Difficulty levels
 while number_limit == 0:
     level = int(input("""Selecione a dificuldade:
-    \nNível 1 \nNível 2 \nNível 3 \n:"""))
+    \nNível 1 \tNível 2 \tNível 3 \n\tNível:"""))
 
     if level == 1:
-        print('Você tem 10 tentativas.\nNúmeros entre 01 e 30.')
         number_limit = 30
         failure = 10
     elif level == 2:
-        print('Você tem 05 tentativas.\nNúmeros entre 01 e 45.')
         number_limit = 45
         failure = 9
     elif level == 3:
-        print('Você tem 03 tentativas.\nNúmeros entre 01 e 60')
         number_limit = 60
         failure = 5
     else:
         print("Escolha a dificuldade correta.")
-
-
 secret_number = random.randint(1, number_limit) # generate random numbers
-
+points = number_limit * 10
+score = int(points / failure)
+# Runnung the game
 while failure > 0:
+    print(error_message)
+    print(f'Points: {points}')
+    print(f'{failure} tentativas.\nNúmeros entre 01 e {number_limit}')
     attempt = int(input("Digite o seu palpite: "))
 
     if attempt == secret_number:
-        print('Você acertou.')
-        print(f'Erros: {failure}')
+        win = True
         break
     else:
-        print('Você errou.')
         if attempt < secret_number:
-            print('O número secreto é maior do que seu palpite.')
+            error_message = '\nO número secreto é maior do que seu palpite.'
         else:
-            print('O número secreto menor do que seu palpite.')
+            error_message = '\nO número secreto é menor do que seu palpite.'
         failure -= 1
+        points -= score
+
+# points system
+if win:
+    print(f'você acertou. Sua pontuação: {points}')
+else:
+    print("Você não tem mais tentativas.")
