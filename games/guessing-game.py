@@ -15,16 +15,21 @@
 # TODO: DONE Create a system points
 # TODO: DONE Stop game running
 # TODO: DONE Verify user's input
-# TODO: Clear the game screen
+# TODO: DONE Clear the game screen
 
 import random
 import os
+
+
+def clear():
+    os.system('clear')
 
 
 failure = 0  # count how many times missed the number
 number_limit = 0
 error_message = ''
 win = False
+leave = False
 
 # Difficulty levels
 while number_limit == 0:
@@ -33,7 +38,7 @@ while number_limit == 0:
     Aperte 'enter' para sair.\tNível: """)
 
     if level == '':
-        print('Saindo do programa.')
+        leave = True
         break
     if level.isnumeric():
         level = int(level)
@@ -59,12 +64,14 @@ while number_limit == 0:
 
 # Runnung the game
 while failure != 0:
-    print(error_message)
+    clear()
     print(f'Points: {points}')
+    print(error_message)
     print(f'{failure} tentativas.\nNúmeros entre 01 e {number_limit}')
     attempt = input("Digite o seu palpite: ")
 
     if attempt == '':
+        leave = True
         break
 
     if attempt.isnumeric():
@@ -81,9 +88,12 @@ while failure != 0:
             points -= score
         msg = f'\nPontuação final: {points}'
 
-if not win:
-    print('Programa encerrado.')
+clear()
 if win:
-    print(f'você acertou.{msg}')
+    print(f'você acertou.')
+    print(f'Número Secreto: {attempt}{msg}')
 else:
-    print(f'Você não tem mais tentativas.{msg}')
+    if leave:
+        print('Programa encerrado.')
+    else:
+        print(f'Você não tem mais tentativas.{msg}')
