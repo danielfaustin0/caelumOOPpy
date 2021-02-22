@@ -8,12 +8,20 @@
  Feb 19 2021 - Daniel Faustino
 """
 
-hidden_word = 'abelha'
-discovered_letters = ['_', '_', '_', '_', '_', '_']
+# TODO DONE: Creat a list to recieve the right guess
+# TODO: Show the wrong guess
+# TODO: Beautify the output from discovered_letters
+# TODO: Clear the game screen
 
-for i in range(1, len(hidden_word)):
+hidden_word = 'abelha'
+discovered_letters = list()
+
+for letter in hidden_word:
+    discovered_letters.append('_')
+
+while '_' in discovered_letters:
     letter_position = 0
-    print(discovered_letters)
+    print(' '.join(discovered_letters))
     letter_input = input('Informe uma letra: ')
 
     if letter_input in hidden_word:
@@ -26,4 +34,6 @@ for i in range(1, len(hidden_word)):
     else:
         print('A letra não está na palavra escondida.')
 
+if '_' not in discovered_letters:
+    print(f'Palavra escondida: {hidden_word.upper()}')
 
