@@ -54,4 +54,4 @@ def play_game():
     if '_' not in discovered_letters:
         print(f'Palavra escondida: {hidden_word.upper()}')
 
-play_game()
+# play_game()
