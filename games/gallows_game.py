@@ -20,34 +20,38 @@ import os
 def clear():
     os.system('clear')
 
-hidden_word = 'abelha'
-discovered_letters = list()
-wrong_guess = list()
 
-for letter in hidden_word:
-    discovered_letters.append('_')
+def play_game():
 
-while '_' in discovered_letters:
-    letter_position = 0
-    print('respostas erradas: ',', '.join(wrong_guess))
-    print('Palavra oculta: ', ' '.join(discovered_letters))
-    letter_input = input('Informe uma letra: ')
+    hidden_word = 'abelha'
+    discovered_letters = list()
+    wrong_guess = list()
+
+    for letter in hidden_word:
+        discovered_letters.append('_')
     clear()
-    if letter_input in hidden_word:
-        for letter in hidden_word:
-            if letter == letter_input:
-                discovered_letters[letter_position] = letter_input.upper()
-            else:
-                pass
-            letter_position += 1
-    else:
-        if letter_input not in wrong_guess:
-            wrong_guess.append(letter_input)
-            print('A letra não está na palavra escondida.')
+    while '_' in discovered_letters:
+        letter_position = 0
+        print('respostas erradas: ',', '.join(wrong_guess))
+        print('Palavra oculta: ', ' '.join(discovered_letters))
+        letter_input = input('Informe uma letra: ')
+        clear()
+        if letter_input in hidden_word:
+            for letter in hidden_word:
+                if letter == letter_input:
+                    discovered_letters[letter_position] = letter_input.upper()
+                else:
+                    pass
+                letter_position += 1
         else:
-            print('Essa letra já foi digitada antes.')
-    
+            if letter_input not in wrong_guess:
+                wrong_guess.append(letter_input)
+                print('A letra não está na palavra escondida.')
+            else:
+                print('Essa letra já foi digitada antes.')
+        
 
-if '_' not in discovered_letters:
-    print(f'Palavra escondida: {hidden_word.upper()}')
+    if '_' not in discovered_letters:
+        print(f'Palavra escondida: {hidden_word.upper()}')
 
+play_game()
