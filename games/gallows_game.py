@@ -16,6 +16,7 @@
 # TODO DONE: Clear the game screen
 
 import os
+import create_files as word
 
 def clear():
     os.system('clear')
@@ -23,18 +24,16 @@ def clear():
 
 def play_game():
 
-    hidden_word = 'abelha'
-    discovered_letters = list()
+    hidden_word = word.choosing_word()
+    discovered_letters = ['_' for letter in hidden_word]
     wrong_guess = list()
-
-    for letter in hidden_word:
-        discovered_letters.append('_')
+    
     clear()
     while '_' in discovered_letters:
         letter_position = 0
         print('respostas erradas: ',', '.join(wrong_guess))
         print('Palavra oculta: ', ' '.join(discovered_letters))
-        letter_input = input('Informe uma letra: ')
+        letter_input = input('Informe uma letra: ').upper()
         clear()
         if letter_input in hidden_word:
             for letter in hidden_word:
