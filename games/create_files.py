@@ -15,7 +15,7 @@ def add_words(word): # Open and Close the file
         words_file.write(f"{word}\r\n")
 
 
-def checking_input(word): # Receive user input
+def checking_input(word): 
     if word.isalpha():
         print("Palavra aceita.")
         add_words(word)
@@ -27,11 +27,12 @@ def checking_input(word): # Receive user input
         """)
 
 
-def user_input():
+def user_input(): # Receive user input
     while True:
         word = input("Enter new word (or 'q' to quit): ").upper()
 
         if word == "Q":
+            print("ENCERRANDO PROGRAMA...")
             break
         else:
             checking_input(word)
@@ -50,5 +51,5 @@ def choosing_word():
     return words[pos]
 
 
-palavra = choosing_word()
-print(palavra)
+# palavra = choosing_word()
+# print(palavra)

@@ -15,6 +15,7 @@
 # TODO DONE: Beautify the output from discovered_letters
 # TODO DONE: Clear the game screen
 
+import time
 import os
 import create_files as word
 
@@ -22,35 +23,92 @@ def clear():
     os.system('clear')
 
 
-def play_game():
-
-    hidden_word = word.choosing_word()
-    discovered_letters = ['_' for letter in hidden_word]
-    wrong_guess = list()
+def game_intro():
+    print("""
+    =-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=
+    =-=-=-=-=- Jogo da Forca -=-=-=-=-=
+    Descubra a palavra oculta.
+    =-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=
     
-    clear()
-    while '_' in discovered_letters:
-        letter_position = 0
-        print('respostas erradas: ',', '.join(wrong_guess))
-        print('Palavra oculta: ', ' '.join(discovered_letters))
-        letter_input = input('Informe uma letra: ').upper()
-        clear()
-        if letter_input in hidden_word:
-            for letter in hidden_word:
-                if letter == letter_input:
-                    discovered_letters[letter_position] = letter_input.upper()
-                else:
-                    pass
-                letter_position += 1
-        else:
-            if letter_input not in wrong_guess:
-                wrong_guess.append(letter_input)
-                print('A letra não está na palavra escondida.')
-            else:
-                print('Essa letra já foi digitada antes.')
+    """)
+
+
+def getting_hidden_word():
+    return word.choosing_word()
+    
+
+def wrong_attempts(letter):
+    if letter in wrong_guess:
+        print(f"Letter {letter} was already used.")
+    else:
+        wrong_guess.append(letter)
+        print(f"Letter {letter} isn't in hidden word.")
+    time.sleep(2.4)
+
+
+def user_input():
+    user_letter = input("Enter a letter: ").upper()
+    checking_input(user_letter)
+
+
+def checking_input(user_letter):
+    if user_letter.isalpha and len(user_letter) == 1:
+        checking_letter(user_letter)
+    else:
+        input_rules()
         
 
-    if '_' not in discovered_letters:
-        print(f'Palavra escondida: {hidden_word.upper()}')
+def checking_letter(letter):
+    if letter in hidden_word:
+        allocate_letter(letter)
+    else:
+        wrong_attempts(letter)
 
-# play_game()
+
+def input_rules():
+    clear()
+    print("""
+    =-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=
+    =-=-=-=-=-| INPUT RULES |-=-=-=-=-=
+    - Don't use numbers.
+    - Don't use spaces.
+    - Enter just a letter at time
+    =-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=
+    
+    """)
+    time.sleep(3.5)
+
+
+def allocate_letter(letter):
+    letter_position = 0
+    for hidden_letter in hidden_word:
+        if hidden_letter == letter:
+            found_letters[letter_position] = letter
+        else:
+            pass
+        letter_position += 1
+    
+
+
+if __name__ == "__main__":
+    wrong_guess = []
+    hidden_word = getting_hidden_word()
+    found_letters = ["_" for i in hidden_word]
+    
+
+    while True:
+        
+        clear()
+        game_intro()
+
+        if "_" in found_letters:
+            print(f"WRONG GUESSES: {'-'.join(wrong_guess)}")
+            print(f"HIDDEN WORD: {''.join(found_letters)}")
+            user_input()
+        else:
+            print(f"HIDDEN WORD: {' '.join(found_letters)}")
+            break
+            
+        
+        # clear()
+    
