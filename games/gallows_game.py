@@ -10,11 +10,6 @@
  Feb 19 2021 - Daniel Faustino
 """
 
-# TODO DONE: Create a list to recieve the right guess
-# TODO DONE: Show the wrong guess
-# TODO DONE: Beautify the output from discovered_letters
-# TODO DONE: Clear the game screen
-
 import time
 import os
 import create_files as word
@@ -126,23 +121,39 @@ def allocate_letter(letter):
     
 
 def play_game():
-    while True:
+    while len(hangman) > len(wrong_guess):
     
-        clear()
-        game_intro()
-        
-
         if "_" in found_letters:
+            clear()
+            game_intro()
+            
             print(f"WRONG GUESSES: {'-'.join(wrong_guess)} ", end='')
             print(hangman[len(wrong_guess)], end=' ')
             print(f"HIDDEN WORD: {''.join(found_letters)}")
             user_input()
         else:
-            print(f"WORD FOUND: {' '.join(found_letters)}")
             break
-        
+
+    clear()
+    game_over()
+            
+
+
+def game_over():
+    if "_" in found_letters:
+        score = boards.lose
+    else:
+        score = boards.win
     
-    # clear()
+    for i in score:
+        print(i)
+        time.sleep(0.3)
+    
+    print(f"HIDDEN WORD --> {' '.join(hidden_word)}")
+    exit()
+
+
+
 
 if __name__ == "__main__":
     wrong_guess = []
@@ -151,5 +162,5 @@ if __name__ == "__main__":
     hangman = user_input_level()
 
     play_game()
-    
-    
+
+   
