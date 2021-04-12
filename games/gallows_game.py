@@ -42,6 +42,7 @@ def user_input_level():
     difficulty = {1:"easy", 2:"hard"}
     while True:
         clear()
+        game_intro()
         level = input("""Select difficulty: 
         1:  easy
         2:  hard
@@ -121,6 +122,7 @@ def allocate_letter(letter):
     
 
 def play_game():
+    hangman = user_input_level()
     while len(hangman) > len(wrong_guess):
     
         if "_" in found_letters:
@@ -154,12 +156,15 @@ def game_over():
 
 
 
+wrong_guess = []
+hidden_word = getting_hidden_word()
+found_letters = hiding_word(hidden_word)
 
 if __name__ == "__main__":
     wrong_guess = []
     hidden_word = getting_hidden_word()
     found_letters = hiding_word(hidden_word)
-    hangman = user_input_level()
+    # hangman = user_input_level()
 
     play_game()
 

@@ -7,8 +7,8 @@
 """
 
 import os
-import gallows_game
-import guessing_game
+import gallows_game as gallows
+import guessing_game as guessing
 
 
 def clear():
@@ -16,31 +16,49 @@ def clear():
 
 leaving_game = False
 
-while not leaving_game:
-    print('Escolha um jogo:')
-    print('Jogo de adivinhação (1)')
-    print('Jogo da Forca (2)')
-    print('Aperte "q" para sair.')
+# while not leaving_game:
 
-    game = input()
-    clear()
+def menu_intro():
+    print("""
+    =-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=
+    =-=-=-=-=-= Pick a Game =-=-=-=-=-=
+        Guessing Game   1
+        Gallows Game    2
 
+    =-=-=-==-=-=-==-=-=-==-=-=-==-=-=-=
+    Enter 'q' to quit.
+    """)
+
+    # return intro
+
+
+def pick_game():
+    picked_game = input()
+    game_menu(picked_game)
+    
+    
+def game_menu(game):
     if game.isnumeric():
-        chosen_game = int(game)
+        picked_game = int(game)
 
-        if chosen_game == 1:
+        if picked_game == 1:
+            guessing.play_game()
 
-            print('Bem vindo ao Jogo de Adivinhação.')
-            guessing_game.play_game()
-        elif chosen_game == 2:
-            print('Bem vindo ao Jogo Da Forca.')
-            gallows_game.play_game()
+        elif picked_game == 2:
+            __name__ == "__main__"
+            gallows.play_game()
         else:
-            print('Opção Inválida.')
+            pass            
     else:
         if game.isalpha():
             if game == 'q':
                 print('Saindo do jogo.')
-                leaving_game = True
+                exit()
             else:
-                print('Opção inválida.')
+                menu_intro()
+                pick_game()
+
+if __name__ == "__main__":
+    clear()
+    menu_intro()
+    pick_game()
